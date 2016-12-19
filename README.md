@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/scorputty/consul.svg?branch=master)](https://travis-ci.org/scorputty/consul) [![](https://images.microbadger.com/badges/image/cryptout/consul.svg)](https://microbadger.com/images/cryptout/consul "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/cryptout/consul.svg)](https://microbadger.com/images/cryptout/consul "Get your own version badge on microbadger.com")
 
-# Docker consul (Alpine)
+# Docker Consul (Alpine)
 
 This is a Dockerfile to set up "Hashicorp Consul" - (https://www.consul.io/).
 
