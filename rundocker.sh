@@ -20,8 +20,10 @@ docker run -d -h $(hostname) \
     -v ${VOL_DATA}:/consul/data \
     -v ${VOL_CONFIG}:/consul/config \
     -v /etc/localtime:/etc/timezone \
-    -e PUID=1000 \
-    -e PGID=1000 \
+    -e appUser=media \
+    -e appGroup=media \
+    -e PUID=10000 \
+    -e PGID=10000 \
     --name=consul --restart=always cryptout/consul
 
   # for troubleshooting run

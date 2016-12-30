@@ -11,7 +11,6 @@ ENV CONSUL_VERSION=0.7.1
 ENV DOCKER_BASE_VERSION=0.0.4
 
 # variables
-# variables
 ENV appUser="media"
 ENV appGroup="media"
 ENV PUID="10000"
@@ -54,7 +53,7 @@ RUN mkdir -p /consul/data && \
     chown -R ${appUser}:${appGroup} /consul
 
 # Expose the consul data directory as a volume since there's mutable state in there.
-VOLUME /consul/data
+VOLUME ["/consul/data", "/consul/config"]
 
 # Server RPC is used for communication between Consul clients and servers for internal
 # request forwarding.

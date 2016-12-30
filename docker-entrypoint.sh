@@ -3,7 +3,7 @@ set -e
 
 # variables
 appUser="media"
-appGroup="10000"
+appGroup="media"
 
 # Note above that we run dumb-init as PID 1 in order to reap zombie processes
 # as well as forward signals to all processes in its session. Normally, sh
@@ -78,13 +78,13 @@ elif consul --help "$1" 2>&1 | grep -q "consul $1"; then
 fi
 
 # If we are running Consul, make sure it executes as the proper user.
-if [ "$1" = 'consul' ]; then
+if [ "$1" = "${appUser}" ]; then
     # If the data or config dirs are bind mounted then chown them.
     # Note: This checks for root ownership as that's the most common case.
-    if [ "$(stat -c %u /consul/data)" != "$(id -u consul)" ]; then
+    if [ "$(stat -c %u /consul/data)" != "$(id -u ${appUser})" ]; then
         chown ${appUser}:${appGroup} /consul/data
     fi
-    if [ "$(stat -c %u /consul/config)" != "$(id -u consul)" ]; then
+    if [ "$(stat -c %u /consul/config)" != "$(id -u ${appUser})" ]; then
         chown ${appUser}:${appGroup} /consul/config
     fi
 
