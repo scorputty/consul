@@ -2,7 +2,7 @@
 set -e
 
 # variables
-appUser="consul"
+appUser="media"
 appGroup="10000"
 
 # Note above that we run dumb-init as PID 1 in order to reap zombie processes

@@ -12,7 +12,7 @@ ENV DOCKER_BASE_VERSION=0.0.4
 
 # variables
 # variables
-ENV appUser="consul"
+ENV appUser="media"
 ENV appGroup="media"
 ENV PUID="10000"
 ENV PGID="10000"
