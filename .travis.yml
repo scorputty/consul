@@ -6,7 +6,7 @@ services:
 env:
   global:
     - appUser="consul"
-    - appGroup="1000"
+    - appGroup="10000"
 
 install:
   - docker build --rm --no-cache -t cryptout/consul ../consul

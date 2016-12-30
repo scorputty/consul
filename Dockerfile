@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 MAINTAINER scorputty
-LABEL Description="Transmission" Vendor="Stef Corputty" Version="0.0.1"
+LABEL Description="Transmission" Vendor="Stef Corputty" Version="0.0.2"
 
 # This is the release of Consul to pull in.
 ENV CONSUL_VERSION=0.7.1
@@ -11,13 +11,17 @@ ENV CONSUL_VERSION=0.7.1
 ENV DOCKER_BASE_VERSION=0.0.4
 
 # variables
+# variables
 ENV appUser="consul"
-ENV appGroup="1000"
+ENV appGroup="media"
+ENV PUID="10000"
+ENV PGID="10000"
 
 # Create a consul user and group first so the IDs get set the same way, even as
 # the rest of this may change over time.
 # user with access to media files and config
-RUN adduser -D -u ${appGroup} ${appUser}
+RUN addgroup -g ${PGID} ${appGroup} && \
+ adduser -G ${appGroup} -D -u ${PUID} ${appUser}
 
 # Set up certificates, our base tools, and Consul.
 RUN apk add --no-cache ca-certificates curl gnupg libcap openssl && \

@@ -3,7 +3,7 @@ set -e
 
 # variables
 appUser="consul"
-appGroup="1000"
+appGroup="10000"
 
 # Note above that we run dumb-init as PID 1 in order to reap zombie processes
 # as well as forward signals to all processes in its session. Normally, sh
