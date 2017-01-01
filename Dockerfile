@@ -49,8 +49,7 @@ RUN apk add --no-cache ca-certificates curl gnupg libcap openssl && \
 # with /consul/config as the configuration directory so you can add additional
 # config files in that location.
 RUN mkdir -p /consul/data && \
-    mkdir -p /consul/config && \
-    chown -R ${appUser}:${appGroup} /consul
+    mkdir -p /consul/config
 
 # Expose the consul data directory as a volume since there's mutable state in there.
 VOLUME ["/consul/data", "/consul/config"]
@@ -72,6 +71,12 @@ EXPOSE 8400 8500 8600 8600/udp
 # entry point script. The entry point script also uses dumb-init as the top-level
 # process to reap any zombie processes created by Consul sub-processes.
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+# set owner
+RUN chown -R ${appUser}:${appGroup} /usr/local/bin/docker-entrypoint.sh /consul
+
+# permissions
+RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
 # switch to appUser
 USER ${appUser}
