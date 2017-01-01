@@ -50,7 +50,7 @@ CONSUL_CONFIG_DIR=/consul/config
 # You can also set the CONSUL_LOCAL_CONFIG environemnt variable to pass some
 # Consul configuration JSON without having to bind any volumes.
 if [ -n "$CONSUL_LOCAL_CONFIG" ]; then
-	echo "$CONSUL_LOCAL_CONFIG" > "$CONSUL_CONFIG_DIR/local.json"
+  echo "$CONSUL_LOCAL_CONFIG" > "$CONSUL_CONFIG_DIR/local.json"
 fi
 
 # If the user is trying to run Consul directly with some arguments, then
@@ -79,15 +79,6 @@ fi
 
 # If we are running Consul, make sure it executes as the proper user.
 if [ "$1" = "${appUser}" ]; then
-    # If the data or config dirs are bind mounted then chown them.
-    # Note: This checks for root ownership as that's the most common case.
-    if [ "$(stat -c %u /consul/data)" != "$(id -u ${appUser})" ]; then
-        chown ${appUser}:${appGroup} /consul/data
-    fi
-    if [ "$(stat -c %u /consul/config)" != "$(id -u ${appUser})" ]; then
-        chown ${appUser}:${appGroup} /consul/config
-    fi
-
     # If requested, set the capability to bind to privileged ports before
     # we drop to the non-root user. Note that this doesn't work with all
     # storage drivers (it won't work with AUFS).
